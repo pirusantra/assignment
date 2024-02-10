@@ -1,0 +1,20 @@
+String sql = "SELECT * FROM Registration";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql); // Corrected executeQuery() method call
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String regName = rs.getString("Name"); // Renamed variable
+                String regEmail = rs.getString("Email"); // Renamed variable
+                String regDob = rs.getString("DateOfBirth"); // Renamed variable
+                String regGender = rs.getString("Gender"); // Renamed variable
+                String regAddress = rs.getString("Address"); // Renamed variable
+                String regCity = rs.getString("City"); // Renamed variable
+                String regState = rs.getString("State"); // Renamed variable
+                String regCountry = rs.getString("Country"); // Renamed variable
+                String regPostalCode = rs.getString("PostalCode"); // Renamed variable
+                String regPhone = rs.getString("Phone"); // Renamed variable
+
+                System.out.println("ID: " + id + ", Name: " + regName + ", Email: " + regEmail + ", DateOfBirth: " + regDob +
+                        ", Gender: " + regGender + ", Address: " + regAddress + ", City: " + regCity + ", State: " +
+                        regState + ", Country: " + regCountry + ", PostalCode: " + regPostalCode + ", Phone: " + regPhone);
+            }
