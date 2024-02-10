@@ -1,0 +1,54 @@
+package pirusantra;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Date;
+
+public class crudoperations {
+
+    public static void main(String[] args) {
+        String jdbcURL = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "2024";
+        String name = "Subhash Santra";
+        String email = "subhashsantra2019@gmail.com";
+        String dob = "1982-01-23"; // Date of Birth in 'yyyy-MM-dd' format
+        String gender = "Male";
+        String address = "Balundi";
+        String city = "Arambagh";
+        String state = "West Bengal";
+        String country = "India";
+        String postalCode = "712413";
+        String phone = "712413";
+
+        try (Connection connection = DriverManager.getConnection(jdbcURL, username, password)) {
+            System.out.println("Database connected successfully.");
+
+            // Convert dob string to java.sql.Date
+            Date dobDate = Date.valueOf(dob);
+
+            String sql = "INSERT INTO Registration (Name, Email, DateOfBirth, Gender, Address, City, State, Country, PostalCode, Phone) " +
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, name);
+                statement.setString(2, email);
+                statement.setDate(3, dobDate);
+                statement.setString(4, gender);
+                statement.setString(5, address);
+                statement.setString(6, city);
+                statement.setString(7, state);
+                statement.setString(8, country);
+                statement.setString(9, postalCode);
+                statement.setString(10, phone);
+                statement.executeUpdate();
+                System.out.println("Registration created successfully.");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
