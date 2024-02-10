@@ -1,0 +1,12 @@
+String sql = "DELETE FROM Registration WHERE Phone = ?";
+        
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, phone);
+            
+            int rowsDeleted = pstmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Registration deleted successfully.");
+            } else {
+                System.out.println("No registration found with the provided phone number.");
+            }
+        }
